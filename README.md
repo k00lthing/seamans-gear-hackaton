@@ -24,7 +24,6 @@ Creates projections (2D), which then stitched together to 3D object. [Dragonfly]
 ## Tools 
 
 [Blender](https://www.blender.org/)  
-[model-viewer](https://modelviewer.dev/)  
 [Three.js](https://threejs.org/)  
 
 
