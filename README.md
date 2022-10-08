@@ -12,9 +12,35 @@ Das Deutsche Schifffahrtsmuseum / Leibniz Institut für Maritime Geschichte (DSM
 **Chronometer** - measure Longitude (360 deg/24 hours = 15 deg for 1 hour). Needs 2 parameters: Beobachtungsort und Zielort.
 **Boxsextant** - measure distance between 2 Objects to determine  position (Latitude) 
 
+## μ-computer tomography 
+
+x-ray tube  - object on rotatiable sample holder - detector panel 
+
+Creates projections (2D), which then stitched together to 3D object. [Dragonfly](https://www.theobjects.com/dragonfly/index.html) software to create the mesh from image stack. 
+
+
+
 
 ## Tools 
 
 [Blender](https://www.blender.org/)  
 [model-viewer](https://modelviewer.dev/)  
 [Three.js](https://threejs.org/)  
+
+
+## Ideation 
+## Web stuff
+### Setup
+Download [Node.js](https://nodejs.org/en/download/).
+Run this followed commands:
+
+``` bash
+# Install dependencies (only the first time)
+npm install
+
+# Run the local server at localhost:8080
+npm run dev
+
+# Build for production in the dist/ directory
+npm run build
+```
