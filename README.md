@@ -15,6 +15,6 @@ Das Deutsche Schifffahrtsmuseum / Leibniz Institut für Maritime Geschichte (DSM
 
 ## Tools 
 
-[Blender](https://www.blender.org/)
-[<model-viewer>](https://modelviewer.dev/)
-[Three.js](https://threejs.org/)
+[Blender](https://www.blender.org/)  
+[model-viewer](https://modelviewer.dev/)  
+[Three.js](https://threejs.org/)  
