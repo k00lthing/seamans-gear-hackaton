@@ -1,19 +1,54 @@
-*
-{
+*{
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
+body{
     overflow: hidden;
+    background-color: aliceblue;
 }
 
-.webgl
-{
+.webgl{
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
+}
+
+#gui-container{
+    display: flex;
+    flex-flow: row-wrap;
+    position: fixed;
+    bottom: 0%;
+    left: 35%;
+    background-color: brown;
+    height: 100px;
+    width: 30%;
+}
+
+.phase, .button{
+    background-color: chartreuse;
+    flex: 1 1 18%;
+    height: auto;
+    margin: 4px;
+    padding: 20px 0;
+    width: auto;
+    text-align: center;
+    font-size: 50px;
+    font-family: Monospace;
+}
+
+.button{
+    background-repeat: no-repeat;
+    padding: 0%;
+    width: auto;
+    height: auto;
+}
+
+#arrow-left{
+    background-image: url(../static/icons/arrow-left.png);
+}
+#arrow-right{
+    background-image: url(../static/icons/arrow-rechts.png);
 }
