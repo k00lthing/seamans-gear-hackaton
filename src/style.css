@@ -21,10 +21,10 @@ body{
     flex-flow: row-wrap;
     position: fixed;
     bottom: 0%;
-    left: 40%;
+    left: 35%;
     background-color: brown;
-    height: 75px;
-    width: 20%;
+    height: 100px;
+    width: 30%;
 }
 
 .phase, .button{
@@ -34,18 +34,21 @@ body{
     margin: 4px;
     padding: 20px 0;
     width: auto;
-}
-/*
-.button{
-    background-color: magenta;
-    height: 75px;
-    width: 20%;
+    text-align: center;
+    font-size: 50px;
+    font-family: Monospace;
 }
 
-.arrow-left{
-    
+.button{
+    background-repeat: no-repeat;
+    padding: 0%;
+    width: auto;
+    height: auto;
 }
-.arrow-right{
- left: 20%;
+
+#arrow-left{
+    background-image: url(../static/icons/arrow-left.png);
 }
-*/
+#arrow-right{
+    background-image: url(../static/icons/arrow-rechts.png);
+}
