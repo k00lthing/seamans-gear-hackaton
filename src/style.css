@@ -1,19 +1,51 @@
-*
-{
+*{
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
+body{
     overflow: hidden;
+    background-color: aliceblue;
 }
 
-.webgl
-{
+.webgl{
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
 }
+
+#gui-container{
+    display: flex;
+    flex-flow: row-wrap;
+    position: fixed;
+    bottom: 0%;
+    left: 40%;
+    background-color: brown;
+    height: 75px;
+    width: 20%;
+}
+
+.phase, .button{
+    background-color: chartreuse;
+    flex: 1 1 18%;
+    height: auto;
+    margin: 4px;
+    padding: 20px 0;
+    width: auto;
+}
+/*
+.button{
+    background-color: magenta;
+    height: 75px;
+    width: 20%;
+}
+
+.arrow-left{
+    
+}
+.arrow-right{
+ left: 20%;
+}
+*/
