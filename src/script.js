@@ -47,6 +47,7 @@ scene.add(camera)
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+controls.dampingFactor = .5
 
 /**
  * Cube
@@ -84,7 +85,7 @@ const tick = () =>
 
     // Render
     renderer.render(scene, camera)
-    renderer.setClearColor( 0xffffff, 1);
+    renderer.setClearColor( 0xFBFBFB, 1);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
