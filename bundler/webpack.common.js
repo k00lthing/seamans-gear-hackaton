@@ -92,6 +92,13 @@ module.exports = {
                     'raw-loader',
                     'glslify-loader'
                 ]
+            },
+
+            // 3D Models
+            {
+                test: /\.(glb|gltf|fbx)$/,
+                exclude: /node_modules/,
+                type: 'asset/resource'
             }
         ]
     }
