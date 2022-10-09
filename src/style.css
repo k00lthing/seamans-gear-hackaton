@@ -26,7 +26,7 @@ body
     position: fixed;
     bottom: 0;
     left: 35%;
-    height: 50px;
+    height: 100px;
     width: 30%;
     /*
     background-color: #ffffff;
@@ -41,20 +41,28 @@ body
 
 .phase, .button
 {
-    background-color: rgb(22, 216, 238);
+    /* background-color: rgb(22, 216, 238); */
     width: auto;
     height: auto;
     margin: 4px;
     flex: 1;
     flex-basis: 20%;
-    /*
-    background-color: #ffffff;
-    opacity: .4;
-    */
+    text-align: center;
+    font-size: 50px;
+
 
 }
 
 #arrow-left
 {
-    background-image: "..\static/icon/a";
+    background-image: url(../static/icon/arrow-left.png);
+    background-repeat: no-repeat;
 }
+
+
+#arrow-right
+{
+    background-image: url(../static/icon/arrow-right.png);
+    background-repeat: no-repeat;
+}
+
