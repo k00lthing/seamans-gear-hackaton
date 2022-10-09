@@ -84,6 +84,7 @@ const tick = () =>
 
     // Render
     renderer.render(scene, camera)
+    renderer.setClearColor( 0xffffff, 1);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
