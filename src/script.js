@@ -116,8 +116,8 @@ scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.autoRotate = false
-controls.autoRotateSpeed = 4
+controls.autoRotate = true
+controls.autoRotateSpeed = 1
 controls.enableDamping = true
 
 /**
