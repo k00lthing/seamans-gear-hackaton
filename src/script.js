@@ -159,6 +159,7 @@ const tick = () =>
 
     // Render
     renderer.render(scene, camera)
+    renderer.setClearColor( 0xffffff, 1);
 
     // update the animation mixer
     mixer.update(deltaTime)

@@ -52,3 +52,51 @@ body{
 #arrow-right{
     background-image: url(../static/icons/arrow-rechts.png);
 }
+#gui-container
+{
+    background-color: rgb(125, 17, 192);
+    display: flex;
+    flex-flow: row-wrap;
+    position: fixed;
+    bottom: 0;
+    left: 35%;
+    height: 100px;
+    width: 30%;
+    /*
+    background-color: #ffffff;
+    opacity: .4;
+    */
+}
+
+.button
+{
+    background-color: rgb(125, 17, 192), 0;
+}
+
+.phase, .button
+{
+    /* background-color: rgb(22, 216, 238); */
+    width: auto;
+    height: auto;
+    margin: 4px;
+    flex: 1;
+    flex-basis: 20%;
+    text-align: center;
+    font-size: 50px;
+
+
+}
+
+#arrow-left
+{
+    background-image: url(../static/icon/arrow-left.png);
+    background-repeat: no-repeat;
+}
+
+
+#arrow-right
+{
+    background-image: url(../static/icon/arrow-right.png);
+    background-repeat: no-repeat;
+}
+
