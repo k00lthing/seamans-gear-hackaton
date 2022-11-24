@@ -119,6 +119,7 @@ const controls = new OrbitControls(camera, canvas)
 controls.autoRotate = true
 controls.autoRotateSpeed = 1
 controls.enableDamping = true
+controls.dampingFactor = .5
 
 /**
  * Cube
@@ -140,6 +141,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setClearColor( 0xdadada, 1 );
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.toneMapping = THREE.ACESFilmicToneMapping
+renderer.toneMappingExposure = 1.2
 
 /**
  * Animate
@@ -159,7 +162,7 @@ const tick = () =>
 
     // Render
     renderer.render(scene, camera)
-    renderer.setClearColor( 0xffffff, 1);
+    renderer.setClearColor( 0xFBFBFB, 1);
 
     // update the animation mixer
     mixer.update(deltaTime)
