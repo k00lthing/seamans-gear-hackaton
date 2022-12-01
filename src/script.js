@@ -2,13 +2,15 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
-import barometer from "../models/gltf/barometer_sorted_combined_1.glb"
+import barometer from "../models/gltf/barometer_sorted_combined_new.glb"
 import { AmbientLight, AnimationClip, AnimationMixer, DirectionalLight, LoopPingPong } from 'three'
+//import Stats from 'stats.js'
 import Stats from 'stats.js'
 
 /**
  * Base
  */
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -17,7 +19,7 @@ const scene = new THREE.Scene()
 
 let stats = new Stats()
 stats.showPanel(0)
-document.body.appendChild( stats.dom );
+document.body.appendChild( stats.dom )
 
 let case_model = null
 let clips = null
@@ -28,11 +30,8 @@ window.SCENE = scene
 
 // Model Loader
 const loader = new GLTFLoader().load(barometer, (gltf) => {
-    console.log(gltf);
-
-    clips = gltf.animations
-    
     scene.add(gltf.scene)
+    clips = gltf.animations
     mixer = new AnimationMixer(gltf.scene)
 
     // iterate over every animation
@@ -45,14 +44,12 @@ const loader = new GLTFLoader().load(barometer, (gltf) => {
     // }
 
     let clip = AnimationClip.findByName(clips, "Animation")
-
-    console.log(clip);
     let action = mixer.clipAction(clip)
 
     action.loop = LoopPingPong
     action.play()
 
-    // // Add the mixer for the case
+    // Add the mixer for the case
     // mixer = new AnimationMixer(case_model)
 
     // let hingeClip = AnimationClip.findByName(clips, 'etui_hinge_top|etui_hinge_top|etui_hinge_top|etui_hinge_top|etu')
@@ -120,15 +117,6 @@ controls.autoRotate = true
 controls.autoRotateSpeed = 1
 controls.enableDamping = true
 controls.dampingFactor = .5
-
-/**
- * Cube
- */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: 0xff0000 })
-)
-//scene.add(cube)
 
 /**
  * Renderer

@@ -89,14 +89,14 @@ body{
 
 #arrow-left
 {
-    background-image: url(../static/icon/arrow-left.png);
+    background-image: url(../static/icons/arrow-left.png);
     background-repeat: no-repeat;
 }
 
 
 #arrow-right
 {
-    background-image: url(../static/icon/arrow-right.png);
+    background-image: url(../static/icons/arrow-rechts.png);
     background-repeat: no-repeat;
 }
 
