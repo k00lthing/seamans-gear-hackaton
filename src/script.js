@@ -2,7 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
-import barometer from "../models/gltf/barometer_sorted_combined_new.glb"
+import barometer from "../models/smaller-file-barometer.glb"
 import { AmbientLight, AnimationClip, AnimationMixer, DirectionalLight, LoopPingPong } from 'three'
 //import Stats from 'stats.js'
 import Stats from 'stats.js'
