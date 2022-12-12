@@ -1,25 +1,28 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
-import barometer from "../models/smaller-file-barometer.glb"
-import { AmbientLight, AnimationClip, AnimationMixer, DirectionalLight, LoopPingPong } from 'three'
-//import Stats from 'stats.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+
+
 import Stats from 'stats.js'
+
 
 /**
  * Base
  */
+
+//Debug 
+
+const stats = new Stats()
+stats.showPanel(0)
+document.body.appendChild( stats.dom )
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-
-let stats = new Stats()
-stats.showPanel(0)
-document.body.appendChild( stats.dom )
 
 let case_model = null
 let clips = null
@@ -29,10 +32,18 @@ let hingeAction = null
 window.SCENE = scene
 
 // Model Loader
-const loader = new GLTFLoader().load(barometer, (gltf) => {
+
+// Instantiate a loader
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('/draco/')
+
+//Load model
+const gltfLoader = new GLTFLoader()
+gltfLoader.setDRACOLoader(dracoLoader)
+gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
     scene.add(gltf.scene)
     clips = gltf.animations
-    mixer = new AnimationMixer(gltf.scene)
+    mixer = new THREE.AnimationMixer(gltf.scene)
 
     // iterate over every animation
     // for(let index in gltf.animations) {
@@ -43,10 +54,10 @@ const loader = new GLTFLoader().load(barometer, (gltf) => {
     //     action.play()
     // }
 
-    let clip = AnimationClip.findByName(clips, "Animation")
+    let clip = THREE.AnimationClip.findByName(clips, "Animation")
     let action = mixer.clipAction(clip)
 
-    action.loop = LoopPingPong
+    action.loop = THREE.LoopPingPong
     action.play()
 
     // Add the mixer for the case
@@ -71,10 +82,10 @@ const loader = new GLTFLoader().load(barometer, (gltf) => {
 })
 
 // Lighting
-const ambientLight = new AmbientLight(0xffffff, 3)
+const ambientLight = new THREE.AmbientLight(0xffffff, 3)
 scene.add(ambientLight)
 
-const directionalLight = new DirectionalLight(0xffffff, 2)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
 scene.add(directionalLight)
 
 /**
