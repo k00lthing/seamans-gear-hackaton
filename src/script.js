@@ -21,8 +21,11 @@ const gui = new dat.GUI()
 var folderRenderer= gui.addFolder('Renderer settings')
 var folderCamera = gui.addFolder('Camera settings')
 var folderLights = gui.addFolder('Light settings')
+var folderAmbLight = folderLights.addFolder('Ambient Light')
 var folderDirLight = folderLights.addFolder('Directional Light')
 var folderObject = gui.addFolder('Object properties')
+
+
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -47,7 +50,7 @@ dracoLoader.setDecoderPath('/draco/')
 const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
 gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
-    // console.log(gltf)
+    console.log(gltf)
     scene.add(gltf.scene)
     clips = gltf.animations
     mixer = new THREE.AnimationMixer(gltf.scene)
@@ -86,28 +89,36 @@ gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
 
     // finally, start the rendering
     tick()
+
+    // Debug
+    folderObject.add(gltf.scene.children[35].material, 'wireframe' )
+
 })
 
 // Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 3)
-ambientLight.receiveShadow = false
-scene.add(ambientLight)
-console.log(ambientLight)
 
-
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+const parametersDirLight  = {
+    color: 0xffffff,
+    intensity: 2,
+    shadowNear: .5,
+    shadowFar: 1
+}
+const directionalLight = new THREE.DirectionalLight(parametersDirLight.color, parametersDirLight.intensity)
 
 //Set up shadow properties for the light
 directionalLight.receiveShadow = false
-directionalLight.shadow.mapSize.width = 512; 
-directionalLight.shadow.mapSize.height = 512; 
-directionalLight.shadow.camera.near = 0.5; 
-directionalLight.shadow.camera.far = 5
+directionalLight.shadow.mapSize.width = 128
+directionalLight.shadow.mapSize.height = 128
+directionalLight.shadow.camera.near = 0.5 
+directionalLight.shadow.camera.far = 1
 scene.add(directionalLight)
 
 
 // Debug
+
+folderDirLight.addColor(parametersDirLight, 'color').onChange(() =>{
+    directionalLight.color.set(parametersDirLight.color)
+})
 
 const helperDirLight = new THREE.DirectionalLightHelper( directionalLight, 1, 0xff0000 )
 scene.add( helperDirLight )
@@ -117,14 +128,17 @@ folderDirLight.add(directionalLight, 'intensity').name('Intensity').min(0).max(2
 
 folderDirLight.add(directionalLight.position, 'x').name('Position X Axis').min(-5).max(5).step(0.01)
 folderDirLight.add(directionalLight.position, 'y').name('Position Y Axis').min(0).max(10).step(0.01)
-folderDirLight.add(directionalLight.position, 'z').name('Position Z Axis').min(-5).max(5).step(0.01)
+folderDirLight.add(directionalLight.position, 'z').name('Position Z Axis').min(-5).max(10).step(0.01)
+
 
 //Create a helper for the shadow camera
 const helperDirLightShadow = new THREE.CameraHelper( directionalLight.shadow.camera )
 scene.add( helperDirLightShadow )
 folderDirLight.add(helperDirLightShadow, 'visible').name('Shadow Helper')
 folderDirLight.add(directionalLight.shadow.camera, 'near').name('Near').min(0).max(5).step(0.01)
-folderDirLight.add(directionalLight.shadow.camera, 'far').name('Far').min(0).max(5).step(0.01)
+folderDirLight.add(parametersDirLight, 'shadowFar').name('Far').min(0).max(500).step(0.01).onChange(() => {
+    directionalLight.shadow.camera.near = parametersDirLight.shadowFar
+})
 
 
 
