@@ -4,8 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
-
 import Stats from 'stats.js'
+import * as dat from 'dat.gui'
 
 
 /**
@@ -13,10 +13,16 @@ import Stats from 'stats.js'
  */
 
 //Debug 
-
 const stats = new Stats()
 stats.showPanel(0)
 document.body.appendChild( stats.dom )
+
+const gui = new dat.GUI()
+var folderRenderer= gui.addFolder('Renderer settings')
+var folderCamera = gui.addFolder('Camera settings')
+var folderLights = gui.addFolder('Light settings')
+var folderDirLight = folderLights.addFolder('Directional Light')
+var folderObject = gui.addFolder('Object properties')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -33,14 +39,15 @@ window.SCENE = scene
 
 // Model Loader
 
-// Instantiate a loader
+// Instantiate DRACO Loader
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('/draco/')
 
-//Load model
+// Load model with GLTF Loader
 const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
 gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
+    // console.log(gltf)
     scene.add(gltf.scene)
     clips = gltf.animations
     mixer = new THREE.AnimationMixer(gltf.scene)
@@ -83,10 +90,45 @@ gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 3)
+ambientLight.receiveShadow = false
 scene.add(ambientLight)
+console.log(ambientLight)
+
+
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+
+//Set up shadow properties for the light
+directionalLight.receiveShadow = false
+directionalLight.shadow.mapSize.width = 512; 
+directionalLight.shadow.mapSize.height = 512; 
+directionalLight.shadow.camera.near = 0.5; 
+directionalLight.shadow.camera.far = 5
 scene.add(directionalLight)
+
+
+// Debug
+
+const helperDirLight = new THREE.DirectionalLightHelper( directionalLight, 1, 0xff0000 )
+scene.add( helperDirLight )
+folderDirLight.add(helperDirLight, 'visible').name('Light Helper')
+
+folderDirLight.add(directionalLight, 'intensity').name('Intensity').min(0).max(2).step(0.01)
+
+folderDirLight.add(directionalLight.position, 'x').name('Position X Axis').min(-5).max(5).step(0.01)
+folderDirLight.add(directionalLight.position, 'y').name('Position Y Axis').min(0).max(10).step(0.01)
+folderDirLight.add(directionalLight.position, 'z').name('Position Z Axis').min(-5).max(5).step(0.01)
+
+//Create a helper for the shadow camera
+const helperDirLightShadow = new THREE.CameraHelper( directionalLight.shadow.camera )
+scene.add( helperDirLightShadow )
+folderDirLight.add(helperDirLightShadow, 'visible').name('Shadow Helper')
+folderDirLight.add(directionalLight.shadow.camera, 'near').name('Near').min(0).max(5).step(0.01)
+folderDirLight.add(directionalLight.shadow.camera, 'far').name('Far').min(0).max(5).step(0.01)
+
+
+
+
 
 /**
  * Sizes
@@ -124,8 +166,8 @@ scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.autoRotate = true
-controls.autoRotateSpeed = 1
+// controls.autoRotate = true
+// controls.autoRotateSpeed = 1
 controls.enableDamping = true
 controls.dampingFactor = .5
 
@@ -142,6 +184,8 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.toneMapping = THREE.ACESFilmicToneMapping
 renderer.toneMappingExposure = 1.2
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 /**
  * Animate
