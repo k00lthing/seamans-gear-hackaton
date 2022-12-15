@@ -21,7 +21,6 @@ const gui = new dat.GUI()
 var folderRenderer= gui.addFolder('Renderer settings')
 var folderCamera = gui.addFolder('Camera settings')
 var folderLights = gui.addFolder('Light settings')
-var folderAmbLight = folderLights.addFolder('Ambient Light')
 var folderDirLight = folderLights.addFolder('Directional Light')
 var folderObject = gui.addFolder('Object properties')
 
@@ -139,9 +138,6 @@ folderDirLight.add(directionalLight.shadow.camera, 'near').name('Near').min(0).m
 folderDirLight.add(parametersDirLight, 'shadowFar').name('Far').min(0).max(500).step(0.01).onChange(() => {
     directionalLight.shadow.camera.near = parametersDirLight.shadowFar
 })
-
-
-
 
 
 /**
