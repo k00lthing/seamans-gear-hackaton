@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barometer</title>
-</head>
-<body>
-    <canvas class="webgl"></canvas>
-    <aside id="gui-container">
-        <div id="arrow-left" class="button"></div>
-        <div id="phase-one" class="phase">1</div>
-        <div id="phase-two" class="phase">2</div>
-        <div id="phase-three" class="phase">3</div>
-        <div id="arrow-right" class="button"></div> 
-    </aside>
-</body>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Barometer</title>
+    </head>
+
+    <body>
+        <canvas class="webgl"></canvas>
+        <aside id="gui-container" class="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-4 max-w-max">
+            <button id="xray">
+                <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                X-Ray
+            </button>
+            <div id="slider" class="carousel relative">
+                <div class="carousel-inner relative overflow-hidden w-full">
+                    <div class="carousel-item absolute opacity-0"></div>
+
+                </div>
+            </div>
+            <button id="reset">
+                <svg class="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 19 2 12 11 5 11 19" />
+                    <polygon points="22 19 13 12 22 5 22 19" />
+                </svg>
+                Reset
+            </button> 
+        </aside>
+    </body>
+
 </html>

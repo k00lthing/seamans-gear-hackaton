@@ -1,4 +1,4 @@
-import './style.css'
+import './style.scss'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -11,6 +11,7 @@ import * as dat from 'dat.gui'
 /**
  * Base
  */
+
 
 //Debug 
 const stats = new Stats()
@@ -48,7 +49,7 @@ dracoLoader.setDecoderPath('/draco/')
 // Load model with GLTF Loader
 const gltfLoader = new GLTFLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
-gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
+gltfLoader.load('/models/case_baro_less_Geo.glb', (gltf) => {
     console.log(gltf)
     scene.add(gltf.scene)
     clips = gltf.animations
@@ -63,11 +64,11 @@ gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
     //     action.play()
     // }
 
-    let clip = THREE.AnimationClip.findByName(clips, "Animation")
-    let action = mixer.clipAction(clip)
+    // let clip = THREE.AnimationClip.findByName(clips, "Animation")
+    // let action = mixer.clipAction(clip)
 
-    action.loop = THREE.LoopPingPong
-    action.play()
+    // action.loop = THREE.LoopPingPong
+    // action.play()
 
     // Add the mixer for the case
     // mixer = new AnimationMixer(case_model)
@@ -90,7 +91,7 @@ gltfLoader.load('/models/smaller-file-barometer.glb', (gltf) => {
     tick()
 
     // Debug
-    folderObject.add(gltf.scene.children[35].material, 'wireframe' )
+    // folderObject.add(gltf.scene.children[35].material, 'wireframe' )
 
 })
 

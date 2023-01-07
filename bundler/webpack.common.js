@@ -22,7 +22,6 @@ module.exports = {
             template: path.resolve(__dirname, '../src/index.html'),
             minify: true
         }),
-        new MiniCSSExtractPlugin()
     ],
     module:
     {
@@ -46,15 +45,16 @@ module.exports = {
 
             // CSS
             {
-                test: /\.css$/,
-                use:
-                [
-                    MiniCSSExtractPlugin.loader,
-                    'css-loader'
-                ]
-            },
+                test: /\.(scss|css)$/,
+                use: [
+                    'style-loader', 
+                    'css-loader', 
+                    'postcss-loader', 
+                    'sass-loader'
+                ],
+              },
 
-            // Images
+            //Images
             {
                 test: /\.(jpg|png|gif|svg)$/,
                 use:
