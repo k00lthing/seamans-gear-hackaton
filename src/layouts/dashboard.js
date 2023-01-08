@@ -22,4 +22,4 @@ class Dashboard {
 
 }
 
-export { Dashboard };
+export const dashboard = new Dashboard()

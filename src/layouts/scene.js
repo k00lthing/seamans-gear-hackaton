@@ -198,5 +198,5 @@ const tick = () =>
 
 }
 
-export { Scene }
+export const scene = new Scene()
 

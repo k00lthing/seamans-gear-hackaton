@@ -39,4 +39,4 @@ class DebugGUI {
 
 }
 
-export { DebugGUI }
+export const debug = new DebugGUI()
