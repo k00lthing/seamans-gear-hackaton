@@ -9,8 +9,8 @@
 
     <body>
         <canvas class="webgl"></canvas>
-        <aside id="gui-container" class="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-4 max-w-max">
-            <button id="xray">
+        <aside id="gui-container" class="absolute m-auto inset-x-0 bottom-0 grid grid-cols-3 gap-4 max-w-max content-center justify-items-center">
+            <button id="xray" class="p-2">
                 <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -19,15 +19,15 @@
                 </svg>
                 X-Ray
             </button>
-            <div id="slider" class="carousel relative">
-                <div class="carousel-inner relative overflow-hidden w-full">
-                    <button class="carousel-item absolute opacity-1">Remove case</button>
-                    <button class="carousel-item absolute opacity-1">Animation 2</button>
-                    <button class="carousel-item absolute opacity-1">Animation 3</button>
-                    <button class="carousel-item absolute opacity-0">Animation 4</button>
+            <div id="slider" class="carousel relative max-w-max h-fit">
+                <div class="carousel-inner relative overflow-hidden w-full flex justify-center">
+                    <button class="carousel-item p-2"> Remove case </button>
+                    <button class="carousel-item p-2">Animation 2</button>
+                    <button class="carousel-item p-2">Animation 3</button>
+                    <button class="carousel-item p-2 hidden">Animation 4</button>
                 </div>
             </div>
-            <button id="reset">
+            <button id="reset" class="p-2">
                 <svg class="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 19 2 12 11 5 11 19" />
