@@ -1,19 +1,13 @@
-import { Button } from '../components/button.js'
-import { ToggleButton } from '../components/toggle-button.js'
-import { Carousel } from '../components/button-carousel.js'
+import { button, carousel, toggle } from '../components'
 
 class Dashboard {
 
     loadDashboard() {
-        // Creata a new instances of imported classes
-        const xrayButton = new ToggleButton()
-        const resetButton = new Button()
-        const buttonCarousel = new Carousel()
 
         // Invoke the method (component)
-        xrayButton.loadToggleButton()
-        buttonCarousel.loadCarousel()
-        resetButton.loadButton()
+        toggle.loadToggleButton()
+        carousel.loadCarousel()
+        button.loadButton()
 
         // Output loading status
         console.log('Dashboard component is loaded...')

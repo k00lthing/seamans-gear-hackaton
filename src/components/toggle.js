@@ -8,4 +8,4 @@ class ToggleButton {
 
 }
 
-export { ToggleButton }
+export const toggle = new ToggleButton()

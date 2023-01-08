@@ -8,4 +8,4 @@ class Button {
 
 }
 
-export { Button }
+export const button = new Button()

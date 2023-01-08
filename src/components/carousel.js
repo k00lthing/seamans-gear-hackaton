@@ -8,4 +8,4 @@ class Carousel {
 
 }
 
-export { Carousel }
+export const carousel = new Carousel()
