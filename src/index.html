@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Barometer</title>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barometer</title>
+</head>
 
-    <body>
-        <canvas class="webgl"></canvas>
-        <aside id="gui-container" class="absolute m-auto inset-x-0 bottom-0 flex gap-4 max-w-max items-center justify-center p-2 bg-neutral-300/50">
-            <button id="xray" class="p-2">
-                <svg class="h-8 w-8 text-black m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+<body>
+    <canvas class="webgl"></canvas>
+    <aside id="gui-container"
+        class="absolute m-auto inset-x-0 bottom-12 flex gap-4 max-w-max items-center justify-center p-2 bg-neutral-300/30 rounded-lg">
+        <button id="xray" class="p-2 rounded-md bg-neutral-300/30">
+            <svg class="h-8 w-8 text-black m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            X-Ray
+        </button>
+        <div id="slider" class="carousel relative max-w-max flex justify-center items-center h-fit bg-neutral-300/30 rounded-md">
+            <div class="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
-                X-Ray
-            </button>
-            <div id="slider" class="carousel relative max-w-max h-fit">
-                <div class="carousel-inner relative overflow-hidden w-full flex justify-center">
-                    <button class="carousel-item p-2"> Remove case </button>
-                    <button class="carousel-item p-2">Animation 2</button>
-                    <button class="carousel-item p-2">Animation 3</button>
-                    <button class="carousel-item p-2 hidden">Animation 4</button>
-                </div>
+
             </div>
-            <button id="reset" class="p-2">
-                <svg class="h-8 w-8 text-black m-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 19 2 12 11 5 11 19" />
-                    <polygon points="22 19 13 12 22 5 22 19" />
+            <div class="carousel-inner relative overflow-hidden w-full flex justify-center">
+                <button class="carousel-item p-2 text-sm"> Remove case </button>
+                <button class="carousel-item p-2 text-sm">Animation 2</button>
+                <button class="carousel-item p-2 text-sm">Animation 3</button>
+                <button class="carousel-item p-2 text-sm hidden">Animation 4</button>
+            </div>
+            <div class="next">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
-                Reset
-            </button> 
-        </aside>
-    </body>
+            </div>
+        </div>
+        <button id="reset" class="p-2 rounded-md bg-neutral-300/30">
+            <svg class="h-8 w-8 text-black m-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 19 2 12 11 5 11 19" />
+                <polygon points="22 19 13 12 22 5 22 19" />
+            </svg>
+            Reset
+        </button>
+    </aside>
+</body>
 
 </html>
