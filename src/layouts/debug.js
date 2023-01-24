@@ -6,6 +6,7 @@ class DebugGUI {
         console.log('GUI component is loaded.')
 
         const gui = new dat.GUI()
+        
         var folderRenderer = gui.addFolder('Renderer settings')
         var folderCamera = gui.addFolder('Camera settings')
         var folderLights = gui.addFolder('Light settings')
@@ -35,6 +36,8 @@ class DebugGUI {
         folderDirLight.add(parametersDirLight, 'shadowFar').name('Far').min(0).max(500).step(0.01).onChange(() => {
             directionalLight.shadow.camera.near = parametersDirLight.shadowFar
         })
+
+        scene.add(gui)
     }
 
 }
