@@ -1,22 +1,47 @@
-
-
+import Glider from 'glider-js/glider'
 class Dashboard {
 
     loadDashboard() {
-
-        // <aside id="gui-container" class=" bottom-0 grid grid-cols-3 gap-4 max-w-max">
-
-        // create a new div element
-        const dashboardParent = document.createElement("aside")
-        dashboardParent.id = "dashboard"
-        dashboardParent.classList.add("absolute", "inset-x-0", "bottom-0", "grid", "grid-cols-3", "gap-4", "max-w-max")
+      
+      window.addEventListener('load', function(){
+        new Glider(document.querySelector('.glider'),  {
+          // Mobile-first defaults
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          scrollLock: true,
+          arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+          },
+          responsive: [
+            {
+              // screens greater than >= 775px
+              breakpoint: 775,
+              settings: {
+                // Set to `auto` and provide item width to adjust to viewport
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                itemWidth: 100,
+                duration: 0.25
+              }
+            },{
+              // screens greater than >= 1024px
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                itemWidth: 100,
+                duration: 0.25
+              }
+            }
+          ]
+        });
+      })
 
         // Output loading status
-        console.log('Dashboard component is loaded...')
-
-        document.body.appendChild(dashboardParent)
-
+        console.log('Dashboard component is loaded.')
     }
+
 
 }
 
