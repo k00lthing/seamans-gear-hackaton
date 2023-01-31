@@ -31,7 +31,7 @@ class Scene {
         const scene = new THREE.Scene()
 
         // Define global objects
-        let model, animation_clips, mixer, etui_anim_group, open_case_action, lift_up_action, measuring_action
+        let model, animation_clips, mixer, open_case_action, lift_up_action, measuring_action
         let etui_parts = []
 
         let uniforms = {
@@ -41,9 +41,8 @@ class Scene {
             rayDir: { value: new THREE.Vector3() }
         }
 
-        let raycaster = new THREE.Raycaster();
-        let mouse = new THREE.Vector2();
-
+        let raycaster = new THREE.Raycaster()
+        let mouse = new THREE.Vector2()
 
         // Model Loader
         // Instantiate DRACO Loader
@@ -53,43 +52,45 @@ class Scene {
         // Load model with GLTF Loader
         const gltfLoader = new GLTFLoader()
         gltfLoader.setDRACOLoader(dracoLoader)
-        gltfLoader.load('/models/last_textured_baro6.glb', (gltf) => {
+        gltfLoader.load(
+            '/models/last_textured_baro_test5.glb',
+            (gltf) => {
 
-            // console.log('Model loaded as : ', gltf)
+                console.log('Model loaded as : ', gltf)
 
-            model = gltf
-            model.scene.scale.set(10, 10, 10)
-            model.scene.traverse(function (child) {
-                if (child.isMesh) {
+                model = gltf
+                model.scene.scale.set(12, 12, 12)
+                model.scene.traverse(function (child) {
+                    if (child.isMesh) {
 
-                    // child.material.map = null
-                    child.castShadow = true
-                    child.receiveShadow = false
+                        // child.material.map = null
+                        child.castShadow = false
+                        child.receiveShadow = false
 
-                    child.material.transparent = true;
-                    child.material.side = THREE.DoubleSide;
-                    child.material.onBeforeCompile = shader => {
-                        shader.uniforms.isXRay = uniforms.isXRay;
-                        shader.uniforms.rayAng = uniforms.rayAng;
-                        shader.uniforms.rayOri = uniforms.rayOri;
-                        shader.uniforms.rayDir = uniforms.rayDir;
-                        shader.vertexShader = `
+                        child.material.transparent = true;
+                        child.material.side = THREE.DoubleSide;
+                        child.material.onBeforeCompile = shader => {
+                            shader.uniforms.isXRay = uniforms.isXRay;
+                            shader.uniforms.rayAng = uniforms.rayAng;
+                            shader.uniforms.rayOri = uniforms.rayOri;
+                            shader.uniforms.rayDir = uniforms.rayDir;
+                            shader.vertexShader = `
           uniform vec3 rayOri;
           varying vec3 vPos;
           varying float vXRay;
           ${shader.vertexShader}
         `.replace(
-                            `#include <begin_vertex>`,
-                            `#include <begin_vertex>
+                                `#include <begin_vertex>`,
+                                `#include <begin_vertex>
             vPos = (modelMatrix * vec4(position, 1.)).xyz;
             
             vec3 vNormal = normalize( normalMatrix * normal );
             vec3 vNormel = normalize( normalMatrix * normalize(rayOri - vPos) );
             vXRay = pow(1. - dot(vNormal, vNormel), 3. );
           `
-                        );
-                        // console.log(shader.vertexShader);
-                        shader.fragmentShader = `
+                            );
+                            // console.log(shader.vertexShader);
+                            shader.fragmentShader = `
           uniform float isXRay;
           uniform float rayAng;
           uniform vec3 rayOri;
@@ -99,10 +100,10 @@ class Scene {
          varying float vXRay;
           ${shader.fragmentShader}
         `.replace(
-                            `#include <dithering_fragment>`,
-                            `#include <dithering_fragment>
+                                `#include <dithering_fragment>`,
+                                `#include <dithering_fragment>
           
-          if(abs(isXRay) > 0.5){
+          if(abs(isXRay) > 0.9){
           
             vec3 xrVec = vPos - rayOri;
             vec3 xrDir = normalize( xrVec );
@@ -115,59 +116,69 @@ class Scene {
           }
           
           `
-                        );
-                        // console.log(shader.fragmentShader);
+                            );
+                            // console.log(shader.fragmentShader);
+                        }
+
                     }
+                })
+                scene.add(model.scene)
+                console.log(scene)
+
+                // Group Etui Parts
+                let etui_bottom = scene.getObjectByName("Lower_Case", true)
+                let etui_top = scene.getObjectByName("Upper_case", true)
+                let etui_hinge_bottom = scene.getObjectByName("etui_hinge_bottom1", true)
+
+                etui_parts.push(etui_bottom, etui_top, etui_hinge_bottom)
+
+                // Define Animation Actions
+
+                mixer = new THREE.AnimationMixer(model.scene)
+                animation_clips = model.animations
+                console.log('Animations: ', animation_clips)
+
+                // etui_anim_group = new THREE.AnimationObjectGroup(animation_clips[8], animation_clips[9])
+                // open_case_action = mixer.clipAction( etui_anim_group )
+                open_case_action = mixer.clipAction(animation_clips[0])
+                open_case_action.setLoop(THREE.LoopOnce)
+                open_case_action.clampWhenFinished = true
 
 
-                }
+                lift_up_action = mixer.clipAction(animation_clips[2])
+                lift_up_action.setLoop(THREE.LoopOnce)
+                lift_up_action.clampWhenFinished = true
+
+                measuring_action = mixer.clipAction(animation_clips[3])
+                measuring_action.setLoop(THREE.LoopPingPong)
+
+
+
+                // List materials
+                model.parser.getDependencies('material').then((materials) => {
+                    console.log('Materials: ', materials)
+                })
+
+
+                // keep an eye on button clicks
+                events()
+
+                // start the rendering
+                tick()
+
+            },
+            // called while loading is progressing
+            function (xhr) {
+
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+            },
+            // called when loading has errors
+            function (error) {
+
+                console.log('An error happened:', error)
+
             })
-            scene.add(model.scene)
-            console.log(scene)
-
-            // Group Etui Parts
-            let etui_bottom = scene.getObjectByName("etui_only_bottom002", true)
-            let etui_top = scene.getObjectByName("etui_only_top_Animation_open_case002", true)
-            let etui_hinge_top = scene.getObjectByName("etui_hinge_top_Animation_open_case", true)
-            let etui_hinge_bottom = scene.getObjectByName("etui_hinge_bottom1", true)
-
-            etui_parts.push(etui_bottom, etui_top, etui_hinge_top, etui_hinge_bottom)
-
-            // Define Animation Actions
-
-            mixer = new THREE.AnimationMixer(model.scene)
-            animation_clips = model.animations
-            console.log('Animations: ', animation_clips)
-
-            // etui_anim_group = new THREE.AnimationObjectGroup(animation_clips[8], animation_clips[9])
-            // open_case_action = mixer.clipAction( etui_anim_group )
-            open_case_action = mixer.clipAction(animation_clips[9])
-            open_case_action.setLoop(THREE.LoopOnce)
-            open_case_action.clampWhenFinished = true
-
-
-            lift_up_action = mixer.clipAction(animation_clips[0])
-            lift_up_action.setLoop(THREE.LoopOnce)
-            lift_up_action.clampWhenFinished = true
-
-            measuring_action = mixer.clipAction(animation_clips[2])
-            measuring_action.setLoop(THREE.LoopOnce)
-            measuring_action.clampWhenFinished = true
-
-
-            // List materials
-            model.parser.getDependencies('material').then((materials) => {
-                console.log('Materials: ', materials)
-            })
-
-
-            // keep an eye on button clicks
-            events()
-
-            // start the rendering
-            tick()
-
-        })
 
         // Lighting
 
@@ -176,9 +187,7 @@ class Scene {
 
         const parametersDirLight = {
             color: 0xffffff,
-            intensity: 2,
-            shadowNear: .5,
-            shadowFar: 1
+            intensity: 1.5
         }
         const directionalLight = new THREE.DirectionalLight(parametersDirLight.color, parametersDirLight.intensity)
 
@@ -217,11 +226,12 @@ class Scene {
          * Camera
          */
         // Base camera
-        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-        camera.position.x = 1
-        camera.position.y = 1
-        camera.position.z = 1
+        const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 100)
+        camera.position.x = 0
+        camera.position.y = 1.5
+        camera.position.z = 3.5
         scene.add(camera)
+
 
         // Controls
         const controls = new OrbitControls(camera, canvas)
@@ -230,8 +240,8 @@ class Scene {
         controls.autoRotateSpeed = 1
         controls.enableDamping = true
         controls.dampingFactor = .5
-        controls.minDistance = .8
-        controls.maxDistance = 2
+        controls.minDistance = 1.5
+        controls.maxDistance = 3
 
 
         /**
@@ -251,6 +261,10 @@ class Scene {
         renderer.shadowMap.enabled = true
         renderer.shadowMap.type = THREE.PCFSoftShadowMap
         console.log('Renderer: ', renderer.info)
+
+
+        // const axesHelper = new THREE.AxesHelper( 3 )
+        // scene.add( axesHelper )
 
         /**
          * Animate
@@ -289,6 +303,13 @@ class Scene {
             // stop autorotate after the first interaction
             controls.addEventListener('start', function () {
                 controls.autoRotate = false
+            })
+
+            // restart autorotate after the last interaction & an idle time has passed
+            controls.addEventListener('end', function () {
+                setTimeout(function () {
+                    controls.autoRotate = true
+                }, 10000)
             })
 
 
