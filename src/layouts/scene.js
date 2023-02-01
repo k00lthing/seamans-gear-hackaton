@@ -226,10 +226,10 @@ class Scene {
          * Camera
          */
         // Base camera
-        const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 1, 100)
+        const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 5)
         camera.position.x = 0
         camera.position.y = 1.5
-        camera.position.z = 3.5
+        camera.position.z = 4
         scene.add(camera)
 
 
