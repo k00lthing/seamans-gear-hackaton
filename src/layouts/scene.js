@@ -381,11 +381,21 @@ class Scene {
                 this.classList.toggle('active')
 
                 if (this.classList.contains('active')) {
+                      // hide leather case
+                      etui_parts.forEach((part) => {
+                        part.visible = false
+                    })
+                    open_button.disabled = true
                     // start lift anim clip
                     lift_up_action.play()
                 } else {
                     // stop
                     lift_up_action.stop()
+                     // show again 
+                     etui_parts.forEach((part) => {
+                        part.visible = true
+                    })
+                    open_button.disabled = false
                 }
 
             }, false)
