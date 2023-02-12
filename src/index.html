@@ -12,7 +12,7 @@
     <aside id="gui-container"
         class="absolute m-auto max-w-5xl inset-x-0 bottom-12 flex justify-center items-center gap-2 p-2 bg-neutral-300/30 rounded-lg">
 
-        <button id="xray" class="p-2 rounded-md bg-neutral-300/30">
+        <button id="xray" class="p-2 rounded-md bg-neutral-300/30 hover:bg-neutral-300/50 disabled:opacity-75">
             <svg class="h-8 w-8 text-black m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -27,17 +27,17 @@
               </svg>
               </button>
             <div class="glider overflow-hidden">
-                <section class="flex justify-center items-center"><button id="open_case" class="p-2 active:ring disabled:opacity-75">Open case</button></section>
-                <section class="flex justify-center items-center"><button id="remove_case">Remove case</button></section>
-                <section class="flex justify-center items-center"><button id="in_action">In action</button></section>
-                <section class="flex justify-center items-center"><button id="lift_up">Lift up</button></section>
+                <section class="flex justify-center items-center"><button id="open_case" class="p-2 rounded-md disabled:opacity-75 bg-neutral-300/30 hover:bg-neutral-300/50">Open case</button></section>
+                <section class="flex justify-center items-center"><button id="remove_case" class="p-2 rounded-md disabled:opacity-75 bg-neutral-300/30 hover:bg-neutral-300/50">Remove case</button></section>
+                <section class="flex justify-center items-center"><button id="in_action" class="p-2 rounded-md disabled:opacity-75 bg-neutral-300/30 hover:bg-neutral-300/50">In action</button></section>
+                <section class="flex justify-center items-center"><button id="lift_up" class="p-2 rounded-md disabled:opacity-75 bg-neutral-300/30 hover:bg-neutral-300/50">Lift up</button></section>
             </div>
             <button aria-label="Next" class="glider-next relative inset-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
               </button>
           </div>
-        <button id="reset" class="p-2 rounded-md bg-neutral-300/30">
+        <button id="reset" class="p-2 rounded-md bg-neutral-300/30 hover:bg-neutral-300/50 disabled:opacity-75">
             <svg class="h-8 w-8 text-black m-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="11 19 2 12 11 5 11 19" />
