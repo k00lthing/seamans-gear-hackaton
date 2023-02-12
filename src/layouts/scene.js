@@ -218,7 +218,7 @@ class Scene {
 
             // Update renderer
             renderer.setSize(sizes.width, sizes.height)
-            renderer.setClearColor(0xffffff, 1)
+            renderer.setClearColor(0xfbfbfb, 1)
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         })
 
