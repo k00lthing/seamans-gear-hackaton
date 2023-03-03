@@ -199,6 +199,9 @@ class Scene {
         directionalLight.shadow.camera.far = 1
         scene.add(directionalLight)
 
+        const helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+scene.add( helper );
+
         /**
          * Sizes
          */
@@ -388,7 +391,9 @@ class Scene {
                     open_button.disabled = true
                     // start lift anim clip
                     lift_up_action.play()
+                    directionalLight.position.set( -5, 5, 0 )
                 } else {
+                    directionalLight.position.set( 0, 5, 0 )
                     // stop
                     lift_up_action.stop()
                      // show again 
