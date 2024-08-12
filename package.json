@@ -12,18 +12,32 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
+    "dat.gui": "^0.7.9",
     "file-loader": "^6.2.0",
+    "glider-js": "^1.7.8",
     "glslify-loader": "^2.0.0",
+    "guify": "^0.15.1",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
+    "lil-gui": "^0.17.0",
     "mini-css-extract-plugin": "^2.1.0",
     "portfinder-sync": "0.0.2",
     "raw-loader": "^4.0.2",
+    "stats.js": "^0.17.0",
     "style-loader": "^3.0.0",
     "three": "^0.130.1",
-    "webpack": "^5.42.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "postcss-loader": "^7.0.2",
+    "postcss-preset-env": "^7.8.3",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "tailwindcss": "^3.2.4",
+    "webpack": "^5.75.0"
   }
 }
